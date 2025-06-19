@@ -51,7 +51,12 @@ export const register = async (req, res) => {
 
     return res
       .status(201)
-      .cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 })
+      .cookie("token", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      })
       .json({
         message: "User register successfully",
         success: true,
@@ -110,7 +115,12 @@ export const login = async (req, res) => {
 
     return res
       .status(200)
-      .cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 })
+      .cookie("token", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      })
       .json({
         message: "logged in successfully",
         success: true,
@@ -127,10 +137,18 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", " ", { maxAge: 0 }).json({
-      message: "logout successfully",
-      success: true,
-    });
+    return res
+      .status(200)
+      .cookie("token", " ", {
+        maxAge: 0,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      })
+      .json({
+        message: "logout successfully",
+        success: true,
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
