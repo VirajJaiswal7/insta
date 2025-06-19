@@ -12,7 +12,7 @@ connectDb();
 
 app.use(
   cors({
-    origin: "https://insta-tau-nine.vercel.app",
+    origin: "https://insta-8ybu.vercel.app",
     credentials: true,
   })
 );
